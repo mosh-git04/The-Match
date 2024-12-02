@@ -1,4 +1,4 @@
-# the-match
+# The Match
  
 “The Match” is an interactive and educational game designed for children ages 9-12, focusing on improving cognitive skills like memory, recognition, and critical thinking.  It will feature three mini-games, each with a unique focus:
 -	Match The Flag
@@ -16,3 +16,11 @@ Match the Characters: Users will be given four names of characters from popular 
 Match the Definition: Users will be given four words and be tasked to drag them to the correct meaning of those words.
 
 Each level will progress harder with more difficult answers and stricter time limits.
+
+
+# Instructions
+1. Click "Start Game" and choose a game mode.
+2. In all game modes, your job is to drag an object from the left to match it to the correct object on the right.
+3. Once you complete a level, you will have the option to move to the next level.
+4. Once all levels are completed, your name will be added to a scoreboard and then you can return to the main menu to try another mini-game.
+
