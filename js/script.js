@@ -75,7 +75,8 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    
+    let countdownTimer;
+    let timeRemaining = 15; // 15-second countdown for making a guess
     let levels = [
         {
             name: "Level 1",
@@ -101,7 +102,7 @@ $(document).ready(function() {
                 ".flag-level1", ".flag-level2", ".flag-level3",
                 ".character-level1", ".character-level2", ".character-level3",
                 ".definition-level1", ".definition-level2", ".definition-level3",
-                ".result-container", ".scoreDisplay", ".game-title", ".guessButton", "#nextLevel"
+                ".result-container", ".scoreDisplay", ".game-title", ".guessButton", "#nextLevel", ".timerDisplay"
             ],
             showFinalScore: function() {
                 $(".resultDisplay").text("Final Score: " + totalScore);
@@ -128,6 +129,7 @@ $(document).ready(function() {
         $(".flag-level3").hide();
         $(".resultDisplay").hide();
         resetFullGame();
+        startTimer(); // Start the countdown timer
     });
 
     // Flag game button
@@ -139,6 +141,7 @@ $(document).ready(function() {
         $(".character-level3").hide();
         $(".resultDisplay").hide();
         resetFullGame();
+        startTimer(); // Start the countdown timer
     });
 
     $("#definition-btn").click(function(){
@@ -149,6 +152,7 @@ $(document).ready(function() {
         $(".definition-level3").hide();
         $(".resultDisplay").hide();
         resetFullGame();
+        startTimer(); // Start the countdown timer
     })
 
 // Make items draggable (can revert before Guess is clicked)
@@ -252,7 +256,7 @@ $(document).on("click", ".guessButton", function() {
     });
 
     $(".summaryContainer").addClass("summaryGuessed");
-
+    clearInterval(countdownTimer);
 
     // Update the total score for the current game
     totalScore += correctAnswers;
@@ -272,6 +276,28 @@ $(".nextLevel").show(); // Use jQuery's show() to ensure it's visible
 console.log("Next level button state after guess clicked:", $(".nextLevel").css("display"));
 });
 let currentLevel = 1; // Variable to track the current level
+
+
+    // Function to start the timer
+    function startTimer() {
+        timeRemaining = 15; // Reset to 15 seconds for each game
+        $('.timerDisplay').text(`Time Left: ${timeRemaining}s`);
+
+        countdownTimer = setInterval(function() {
+            timeRemaining--;
+            $('.timerDisplay').text(`Time Left: ${timeRemaining}s`);
+
+            if (timeRemaining <= 0) {
+                clearInterval(countdownTimer);
+                autoGuess();
+            }
+        }, 1000);
+    }
+
+    // Function to automatically make a guess when time runs out
+    function autoGuess() {
+        $(".guessButton").click(); // Trigger guess logic
+    }
 
 // Logic for the next level button
 $(document).on("click", ".nextLevel", function() {
@@ -314,6 +340,9 @@ $(document).on("click", ".nextLevel", function() {
         $(".summaryContainer").removeClass("summaryGuessed");
     }
 
+    clearInterval(countdownTimer); // Clear any existing timer
+    startTimer(); // Start a new countdown timer
+
     // Log for debugging
     console.log("Current level:", currentLevel, "Elements to show:", currentLevelData.elementsToShow);
     }    
@@ -329,6 +358,7 @@ $(".restart-btn").click(function() {
     $(".result-container").show();
     $(".summaryContainer").removeClass("summaryGuessed");
     $(".summaryList").empty();
+    clearInterval(countdownTimer);
 });
 
 $(document).on("click", ".back-to-menu", function () {
@@ -356,6 +386,7 @@ $(document).on("click", ".back-to-menu", function () {
 
     // Reset overlays from droppables
     $(".droppable .overlay").remove();
+    clearInterval(countdownTimer);
 });
 
 

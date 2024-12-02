@@ -354,7 +354,11 @@ body.light-mode #summaryContainer {
   color: #ffffff; /* Dark text color */
 }
 
-
+.timerDisplay{
+  font-size: 2rem; 
+  color: red; 
+  margin-bottom: 20px;
+}
 
 .overlay {
   position: absolute;
