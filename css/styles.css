@@ -1,0 +1,431 @@
+/* Title styles */
+#title {
+  text-align: center;
+  margin-bottom: -50px; 
+}
+
+#title h1 {
+  font-size: 72px; 
+  color: #ffffff;
+  letter-spacing: 5px;
+}
+
+input{
+  font-family: 'Bubblegum Sans', cursive;
+  width: 100%;
+  padding: 2%;
+  font-size: 1.1em;
+  border-radius: 10px;
+  margin-bottom: 5%;
+}
+#submitName{
+  font-family: 'Bubblegum Sans', cursive;
+  border-radius: 15px;
+  width: 50%;
+  margin-inline: 25%;
+  background-color: #00FFBA;
+  padding: 2%;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  border:ridge 5px;
+  border-color: #422503;
+}
+
+#submitName:hover {
+  background-color: #00ff4081;
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+#errorMessage{
+  background-color: red;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+body {
+  font-family: 'Bubblegum Sans', cursive;
+  background-color: #2c3e50d0; /* Background should background image fail to load */
+  background-image: url('../images/dark_background2.jpg'); 
+  background-size: cover; /* Cover to ensure the background fits well */
+  background-blend-mode: darken;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height for a more immersive experience */
+  color: #f1ecef; /* Light text color for better contrast */
+  overflow: hidden; /* Hide scrollbars */
+  
+}
+
+/* Default (night mode) */
+body.night-mode {
+background-image: url('../images/dark_background2.jpg');
+}
+
+/* Light mode */
+body.light-mode {
+background-image: url('../images/lightbackground_1.png');
+background-size: cover;
+background-blend-mode: normal;
+}
+
+/* Light Mode Containers - darker background */
+body.light-mode .flag-game-container,
+body.light-mode .character-game-container,
+body.light-mode .definition-game-container,
+body.light-mode .menu,
+body.light-mode .instructions,
+body.light-mode #game-selection,
+body.light-mode #summaryContainer {
+  background: rgba(0, 0, 0, 0.7); /* Darker background for light mode */
+  color: #fff;
+}
+
+.menu {
+  text-align: center;
+  background: rgba(44, 62, 80, 0.9); /* Semi-transparent background */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.menu h1 {
+  color: #00FFBA;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  
+}
+
+.menu-button, #back-btn {
+  font-family: 'Bubblegum Sans', cursive;
+  width: 100%;
+  display: block;
+  background-color: #00FFBA;
+  border: none;
+  border-radius: 15px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  margin: 10px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border:ridge 5px;;
+  border-color: #422503;
+}
+
+.menu-button:hover, #back-btn:hover {
+  background-color: #00ff4081;
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+#audio-btn, #brightness-mode, #fullscreen-mode {
+  width: 50px;
+  height: 50px;
+  background-color: #00FFBA;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  border:ridge 5px;
+  border-color: #422503;
+}
+
+#audio-btn:hover, #brightness-mode:hover, #fullscreen-mode:hover {
+  background-color: #00ff4081;
+}
+
+.instructions {
+  background-color: rgba(44, 62, 80, 0.9);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  margin: 20px 0;
+}
+
+.instructions p {
+  width: 600px;
+  font-size: 24px;
+  line-height: 1.5; /* Improved line spacing for readability */
+}
+
+/* Game Selector Styles */
+#game-selection {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+.game-selector h1 {
+  font-size: 2.5rem;
+  color: #00FFBA;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+  
+}
+
+.game-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.game-option {
+  text-align: center;
+  color: #fff;
+}
+
+.game-option p {
+  font-size: 1.5rem;
+  color: #d94263;
+}
+
+/* Game Selection Styles */
+.game-selection-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px;
+  margin: 10px;
+  padding-right: 20px;
+}
+
+.game img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.game p {
+  font-size: 1.5em;
+  margin: 5px 0;
+}
+
+.game-btn {
+  font-family: 'Bubblegum Sans', cursive;
+  padding: 10px 20px;
+  background-color: #00FFBA;
+  color: #000;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border:ridge 5px;
+  border-color: #422503;
+}
+
+.game-btn:hover {
+  background-color: #00ff4081;
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+#flag-game, #character-game, #definition-game {
+  width: 1600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* Style for the game container */
+.flag-game-container, .character-game-container, .definition-game-container {
+ 
+  background: rgba(44, 62, 80, 0.5);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-container, .flag-level2, .flag-level3, .character-level2, .character-level3, .definition-level2, .definition-level3 {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 900px;
+  margin-bottom: 20px; /* Adds space between the game and the button */
+  
+}
+
+[data-country], [data-character], [data-word] {
+  font-size: 2rem;
+  align-items: center; 
+  display: flex;
+  justify-content: center;
+}
+
+.definitions [data-word]{
+  font-size: 1.2rem;
+  
+}
+
+
+/* 2x2 grid layout for countries and flags */
+.countries, .flags, .characters, .characterImage, .words, .definitions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  justify-items: center;
+}
+
+.draggable, .droppable {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  background-color: #00FFBA;
+  color: white;
+  border-radius: 10px;
+  cursor: move;
+  border:ridge 5px;
+  border-color: #422503;
+}
+
+.draggable {
+  position: relative;
+  width: 100px;
+  height: 50px;
+  margin: 25px;
+  margin-top: 50px;
+  padding: 25px;
+}
+
+.droppable {
+  background-color: #e8e8e800;
+  border: 2px dashed #d94263;
+  line-height: 0; /* Remove text line-height */
+}
+
+.droppable img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+.guessButton, .nextLevel, .back-to-menu, .restart-btn{
+  background-color: #00FFBA; /* Highlight color for button */
+  color: #fff; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding for button */
+  border-radius: 15px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 1.2rem; /* Button text size */
+  transition: background-color 0.3s; /* Smooth background change */
+  margin-top: 20px;
+  margin-inline: 10px;
+  font-family: 'Bubblegum Sans', cursive;   
+  border:ridge 5px;
+  border-color: #422503;
+}
+
+.guessButton:hover, .nextLevel:hover, .back-to-menu:hover, .restart-btn:hover {
+  background-color: #00ff4081; /* Highlight color on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.result-container {
+  display: flex; /* Flexbox for horizontal alignment */
+  justify-content: space-between; /* Spread elements: result on left, button on right */
+  align-items: center; /* Vertically center both */
+}
+
+.nextLevel {
+  float: right;
+}
+
+.resultDisplay {
+  font-size: 2rem; /* Increase result display size */
+  margin-top: 20px;
+  color: #ffffff; /* Dark text color */
+}
+
+
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px; /* Adjust size to fit the droppable */
+  z-index: 20; /* Ensure it is on top of the droppable */
+  align-content: center;
+}
+
+.checkmark {
+  background-color: rgba(0, 255, 0, .7); /* Green for correct country text */
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+}
+
+.crossmark {
+  background-color: rgba(255, 0, 0, .7); /* Red for incorrect country text */
+  width: 50px;
+  height: 50px; 
+  border-radius: 10%;
+}
+.droppable {
+  position: relative; /* Make sure the droppable is positioned to allow absolute positioning of overlays */
+}
+
+.draggable {
+  position: relative;
+  z-index: 15; /* Ensure draggables are above droppables and overlays */
+}
+
+.summaryContainer {
+  position: absolute;
+  right: 100px; /* Adjust the spacing as needed */
+  top: 200px;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: rgba(44, 62, 80, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.summaryGuessed{
+  position: absolute;
+  right: 300px; /* Adjust the spacing as needed */
+  top: 200px;
+  width: 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background: rgba(44, 62, 80, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.summaryList li {
+  margin-bottom: 8px;
+}
+
+.correct-item {
+  color: green;
+}
+
+.incorrect-item {
+  color: red;
+}
+
+.guessButton, .nextLevel, .back-to-menu, .restart-btn {
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+}

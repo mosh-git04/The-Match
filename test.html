@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Match</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'>
+</head>
+<body class="night-mode">
+    <div id="title">
+        <h1>The Match</h1>
+    </div>
+
+    <!-- Game Selection Menu -->
+    <div id="game-selection">
+        <h2>Select a Game</h2>
+        <div class="game-selection-container">
+            <div class="game">
+                <img src="flag-game/game-logo/flag-game-logo.png" alt="flag game logo">
+                <p>Match The Flag</p>
+                <button class="game-btn" id="flag-btn">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Match The Flag Game -->
+    <div id="flag-game" style="display:none;">
+        <div class="flag-game-container">
+            <h1>Match The Flag</h1>
+            <h2 class="scoreDisplay" id="scoreDisplay">Score: 0</h2>
+            <div class="game-container"> 
+                <div class="countries">
+                    <div class="draggable" data-country="scotland">Scotland</div>
+                    <div class="draggable" data-country="canada">Canada</div>
+                    <div class="draggable" data-country="brazil">Brazil</div>
+                    <div class="draggable" data-country="england">England</div>
+                </div>
+                <div class="flags">
+                    <div class="droppable" data-country="scotland"><img src="flag-game/flags/Scotland.png" alt="Scotland"></div>
+                    <div class="droppable" data-country="brazil"><img src="flag-game/flags/Brazil.webp" alt="Brazil"></div>
+                    <div class="droppable" data-country="england"><img src="flag-game/flags/England.webp" alt="England"></div>
+                    <div class="droppable" data-country="canada"><img src="flag-game/flags/Canada.jpg" alt="Canada"></div>
+                </div>
+            </div>
+
+            <div class="result-container">
+                <button id="guessButton">Guess</button>
+                <button id="nextLevel" style="display: none;">Next Level</button>
+                <button id="back-to-menu">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
+    <script src="test.js"></script>
+</body>
+</html>
