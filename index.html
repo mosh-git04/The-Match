@@ -34,6 +34,7 @@
         <h1>Main Menu</h1>
         <button class="menu-button" id="start-btn">Start Game</button>
         <button class="menu-button" id="instructions-btn">Instructions</button>
+        <button class="menu-button" id="scoreboard-btn">Scoreboard</button>
         <button class="menu-button" id="exit-btn">Exit</button>
         <audio id="interact-audio">
             <source src="audio/interact.mp3" type="audio/mpeg">
@@ -45,8 +46,15 @@
         <h1>Instructions</h1>
         <p>1. Click "Start Game" and choose a game mode.</p>
         <p>2. In all game modes, your job is to drag an object from the left to match it to the correct object on the right.</p>
-        <button id="back-btn">Back to Menu</button>
+        <button class="back-btn">Back to Menu</button>
     </div>
+
+        <!-- Scoreboard -->
+        <div id="scoreboard" style="display: none;">
+            <h2>Scoreboard</h2>
+            <div id="scoreboard-content"></div>
+            <button class="back-btn">Back to Menu</button>
+        </div>
 
     <!-- Game Selection -->
     <div id="game-selection" style="display:none;">
@@ -286,57 +294,7 @@
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
     <script src="js/script.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#submitName').click(function() {
-                var userName = $('#userName').val();
-                var $userNameInput = $('#userName'); // Cache the input field
 
-                // Check if userName is provided
-                if (userName) {
-                    $('#userDisplayName').text(userName);
-                    $('#welcome-message').show();
-                    $('#name-input').hide();
-                    $('#menu').show();
-
-                    // Remove error state
-                    $userNameInput.css({
-                        'border': '',
-                        'animation': '' // Clear any animation
-                    });
-                    $('#errorMessage').text(""); // Clear any previous error messages
-                } else {
-                    // Show error message and add pulsate effect
-                    $('#errorMessage').text("--Username must not be blank--");
-                    
-                    // Define the pulsate animation
-                    $userNameInput.css({
-                        'border': '2px solid red',
-                        'animation': 'pulsate 0.6s 3' // Add pulsate animation
-                    });
-
-                    // Create the keyframes for the pulsate effect dynamically
-                    var style = document.createElement('style');
-                    style.innerHTML = `
-                        @keyframes pulsate {
-                            0% {
-                                transform: scale(1);
-                            }
-                            50% {
-                                transform: scale(1.05);
-                            }
-                            100% {
-                                transform: scale(1);
-                            }
-                        }
-                    `;
-                    document.head.appendChild(style);
-
-                    $userNameInput.focus(); // Focus on the input field
-                }
-            });
-        });
-    </script>
 
 </body>
 </html>

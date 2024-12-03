@@ -100,7 +100,7 @@ body.light-mode #summaryContainer {
   
 }
 
-.menu-button, #back-btn {
+.menu-button, .back-btn {
   font-family: 'Bubblegum Sans', cursive;
   width: 100%;
   display: block;
@@ -116,7 +116,7 @@ body.light-mode #summaryContainer {
   border-color: #422503;
 }
 
-.menu-button:hover, #back-btn:hover {
+.menu-button:hover, .back-btn:hover {
   background-color: #00ff4081;
   transform: translateY(-2px); /* Slight lift effect on hover */
 }
@@ -151,6 +151,24 @@ body.light-mode #summaryContainer {
   font-size: 24px;
   line-height: 1.5; /* Improved line spacing for readability */
 }
+
+#scoreboard-content {
+  display: flex;
+  justify-content: space-around;
+  gap: 50px;
+}
+
+.scoreboard-column {
+  width:30%;
+  padding: 50px;
+  background-color: rgba(44, 62, 80, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #fff;
+}
+
+
 
 /* Game Selector Styles */
 #game-selection {
@@ -287,7 +305,7 @@ body.light-mode #summaryContainer {
   height: 200px;
   text-align: center;
   background-color: #00FFBA;
-  color: white;
+  color: #000;
   border-radius: 10px;
   cursor: move;
   border:ridge 5px;

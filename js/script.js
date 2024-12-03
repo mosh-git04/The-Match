@@ -11,9 +11,17 @@ $(document).ready(function() {
         $("#instructions").show();    // Show the instructions screen
     });
 
+    // Show scoreboard button
+    $("#scoreboard-btn").click(function() {
+        $("#menu").hide();           // Hide the main menu
+        $("#scoreboard").show();
+        displayScoreboard();
+    });
+
     // Back Button Click from Instructions
-    $("#back-btn").click(function() {
+    $(".back-btn").click(function() {
         $("#instructions").hide();    // Hide the instructions screen
+        $("#scoreboard").hide(); // Hide the scoreboard
         $("#menu").show();            // Show the main menu
     });
 
@@ -50,7 +58,7 @@ $(document).ready(function() {
     });
 
     var aud = document.getElementById('interact-audio');
-    $(".menu-button, #audio-btn, #brightness-mode, .game-btn, .back-to-menu, #back-btn, #submitName").on("click", function(){
+    $(".menu-button, #audio-btn, #brightness-mode, .game-btn, .back-to-menu, .back-btn, #submitName").on("click", function(){
         aud.play();
     })
 
@@ -73,10 +81,60 @@ $(document).ready(function() {
 
 
 
-
-$(document).ready(function() {
     let countdownTimer;
     let timeRemaining = 15; // 15-second countdown for making a guess
+    let totalTime = 0; // Track total time taken for each game
+    let userName = "";
+    let totalScore = 0; // Track the total score
+
+    $('#submitName').click(function() {
+        userName = $("#userName").val().trim();
+        var $userNameInput = $('#userName'); // Cache the input field
+
+        // Check if userName is provided
+        if (userName) {
+            $('#userDisplayName').text(userName);
+            $('#welcome-message').show();
+            $('#name-input').hide();
+            $('#menu').show();
+
+            // Remove error state
+            $userNameInput.css({
+                'border': '',
+                'animation': '' // Clear any animation
+            });
+            $('#errorMessage').text(""); // Clear any previous error messages
+        } else {
+            // Show error message and add pulsate effect
+            $('#errorMessage').text("--Username must not be blank--");
+            
+            // Define the pulsate animation
+            $userNameInput.css({
+                'border': '2px solid red',
+                'animation': 'pulsate 0.6s 3' // Add pulsate animation
+            });
+
+            // Create the keyframes for the pulsate effect dynamically
+            var style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes pulsate {
+                    0% {
+                        transform: scale(1);
+                    }
+                    50% {
+                        transform: scale(1.05);
+                    }
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+
+            $userNameInput.focus(); // Focus on the input field
+        }
+    });
+
     let levels = [
         {
             name: "Level 1",
@@ -122,6 +180,7 @@ $(document).ready(function() {
 
     // Flag game button
     $("#flag-btn").click(function() {
+        currentGameType = "flag";
         $("#game-selection").hide();
         $("#title").hide();
         $("#flag-game").show();
@@ -134,6 +193,7 @@ $(document).ready(function() {
 
     // Flag game button
     $("#character-btn").click(function() {
+        currentGameType = "character";
         $("#game-selection").hide();
         $("#title").hide();
         $("#character-game").show();
@@ -145,6 +205,7 @@ $(document).ready(function() {
     });
 
     $("#definition-btn").click(function(){
+        currentGameType = "definition";
         $("#game-selection").hide();
         $("#title").hide();
         $("#definition-game").show();
@@ -214,7 +275,6 @@ $(".droppable").droppable({
 
 
 
-let totalScore = 0;
 $(document).on("click", ".guessButton", function() {
     let correctAnswers = 0; // Initialize correctAnswers variable for this level
 
@@ -281,6 +341,7 @@ let currentLevel = 1; // Variable to track the current level
     // Function to start the timer
     function startTimer() {
         timeRemaining = 15; // Reset to 15 seconds for each game
+        totalTime++
         $('.timerDisplay').text(`Time Left: ${timeRemaining}s`);
 
         countdownTimer = setInterval(function() {
@@ -350,6 +411,7 @@ $(document).on("click", ".nextLevel", function() {
 
 // Restart Game Button Click
 $(".restart-btn").click(function() {
+    saveGameData(); // Save game data when the game ends
     $(".resultBoard").hide(); // Hide the result board
     $(".resultDisplay").hide();
     resetFullGame(); // Reset the game
@@ -362,6 +424,7 @@ $(".restart-btn").click(function() {
 });
 
 $(document).on("click", ".back-to-menu", function () {
+    saveGameData(); // Save game data when the game ends
     // Hide all game containers
     $("#flag-game, #character-game, #definition-game, .flag-level2, .flag-level3, .character-level2, .character-level3, .definition-level2, .definition-level3, .nextLevel").hide();
     $(".guessButton").show();
@@ -432,8 +495,70 @@ function resetGame(resetLevels = true, resetScores = true, resetDraggables = tru
 
     // Remove any overlays
     $(".droppable .overlay").remove();
-    $(".summaryContainer").removeClass("summaryGuessed");
-}});
+    $(".summaryContainer").removeClass("summaryGuessed");  
+}
+
+    // Function to save game data to local storage
+    function saveGameData() {
+        let gameData = {
+            userName: userName,
+            totalScore: totalScore,
+            totalTime: totalTime,
+            gameType: currentGameType // Save the current game type here
+        };
+
+        console.log("Saving game data:", gameData); // Debugging log for saving data
+
+        // Check if there is already data in local storage
+        let scoreboard = JSON.parse(localStorage.getItem('scoreboard')) || [];
+        scoreboard.push(gameData);
+        localStorage.setItem('scoreboard', JSON.stringify(scoreboard));
+
+        console.log("Current Local Storage:", localStorage.getItem('scoreboard')); // Debugging log for stored data
+    }
+
+    // Display the scoreboard from local storage
+    function displayScoreboard() {
+        let scoreboard = JSON.parse(localStorage.getItem('scoreboard')) || [];
+        let flagGameHtml = "<h3>Match The Flag Scores</h3>";
+        let characterGameHtml = "<h3>Match The Characters Scores</h3>";
+        let definitionGameHtml = "<h3>Match The Definition Scores</h3>";
+
+        if (scoreboard.length === 0) {
+        flagGameHtml += "<p>No scores recorded yet for Match The Flag.</p>";
+        characterGameHtml += "<p>No scores recorded yet for Match The Characters.</p>";
+        definitionGameHtml += "<p>No scores recorded yet for Match The Definition.</p>";
+        } else {
+            scoreboard.forEach(function(entry, index) {
+            if (entry.gameType === 'flag') {
+                flagGameHtml += `<div class="score-entry">
+                    <span>Username: ${entry.userName}</span>,
+                    <span>Final Score: ${entry.totalScore}</span>,
+                    <span>Total Time: ${entry.totalTime}s</span>
+                </div>`;
+            } else if (entry.gameType === 'character') {
+                characterGameHtml += `<div class="score-entry">
+                    <span>Username: ${entry.userName}</span>,
+                    <span>Final Score: ${entry.totalScore}</span>,
+                    <span>Total Time: ${entry.totalTime}s</span>
+                </div>`;
+            } else if (entry.gameType === 'definition') {
+                definitionGameHtml += `<div class="score-entry">
+                    <span>Username: ${entry.userName}</span>,
+                    <span>Final Score: ${entry.totalScore}</span>,
+                    <span>Total Time: ${entry.totalTime}s</span>
+                </div>`;
+                  
+                ;
+            }});
+        }
+
+        $("#scoreboard-content").html(
+            `<div class="scoreboard-column">${flagGameHtml}</div>
+             <div class="scoreboard-column">${characterGameHtml}</div>
+             <div class="scoreboard-column">${definitionGameHtml}</div>`
+        );
+    };
 
 
 
