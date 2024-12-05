@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,23 +10,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'>
 </head>
-<body class="night-mode">
-    <div id="title"><h1>The Match</h1></div>
+<!-- SECTION: Body-->
 
-    <!-- Name Input Section -->
+<body class="night-mode">
+    <div id="title">
+        <h1>The Match</h1>
+    </div>
+
+    <!-- SECTION: Name Input Section -->
     <div id="name-input">
         <span id="errorMessage"></span>
         <h2>Please enter your name:</h2>
-        <input type="text" id="userName" placeholder="Your Name" />
+        <input type="text" id="userName" placeholder="Your Name" autocomplete="off"/>
         <button id="submitName">Submit</button>
     </div>
 
-    <!-- Welcome Message -->
+    <!-- SECTION: Welcome Message -->
     <div id="welcome-message" style="display:none;">
         <h2>User: <span id="userDisplayName"></span></h2>
     </div>
 
-    <!-- Main Menu -->
+    <!-- SECTION: Main Menu -->
     <div id="menu" class="menu" style="display:none;">
         <audio id="demo" src="audio/background-music.mp3"></audio>
         <button id="audio-btn"><i class="fas fa-volume-up fa-xl"></i></button>
@@ -41,22 +46,23 @@
         </audio>
     </div>
 
-    <!-- Instructions -->
+    <!-- SECTION: Instructions -->
     <div id="instructions" class="instructions">
         <h1>Instructions</h1>
         <p>1. Click "Start Game" and choose a game mode.</p>
-        <p>2. In all game modes, your job is to drag an object from the left to match it to the correct object on the right.</p>
+        <p>2. In all game modes, your job is to drag an object from the left to match it to the correct object on the
+            right.</p>
         <button class="back-btn">Back to Menu</button>
     </div>
 
-        <!-- Scoreboard -->
-        <div id="scoreboard" style="display: none;">
-            <h2>Scoreboard</h2>
-            <div id="scoreboard-content"></div>
-            <button class="back-btn">Back to Menu</button>
-        </div>
+    <!-- SECTION: Scoreboard -->
+    <div id="scoreboard" style="display: none;">
+        <h2>Scoreboard</h2>
+        <div id="scoreboard-content"></div>
+        <button class="back-btn">Back to Menu</button>
+    </div>
 
-    <!-- Game Selection -->
+    <!-- SECTION: Game Selection -->
     <div id="game-selection" style="display:none;">
         <h2>Select a Game</h2>
         <div class="game-selection-container">
@@ -78,13 +84,13 @@
         </div>
     </div>
 
-    <!-- Match The Flag Game -->
+    <!-- SECTION: Match The Flag Game -->
     <div id="flag-game" style="display:none;">
         <div class="flag-game-container">
             <h1 class="game-title">Match The Flag</h1>
             <div class="timerDisplay">Time Left: 15s</div>
             <h2 class="scoreDisplay" id="scoreDisplay">Score: 0</h2>
-            <div class="game-container"> 
+            <div class="game-container">
                 <div class="countries">
                     <div class="draggable" data-country="scotland">Scotland</div>
                     <div class="draggable" data-country="canada">Canada</div>
@@ -126,7 +132,7 @@
                     <div class="droppable" data-country="turkey"><img src="flag-game/flags/Turkey.png" alt="Turkey"></div>
                 </div>
             </div>
-            
+
             <div class="result-container">
                 <h2 class="resultDisplay"></h2>
                 <button class="guessButton">Guess</button>
@@ -148,153 +154,182 @@
 
 
 
-        <!-- Match The Characters Game -->
-        <div id="character-game" style="display:none;">
-            <div class="character-game-container">
-                <h1 class="game-title">Match The Character</h1>
-                <div class="timerDisplay">Time Left: 15s</div>
-                <h2 class="scoreDisplay" id="scoreDisplay">Score: 0</h2>
-                <div class="game-container"> 
-                    <div class="characters">
-                        <div class="draggable" data-character="pikachu">Pikachu</div>
-                        <div class="draggable" data-character="steve">Steve</div>
-                        <div class="draggable" data-character="luigi">Luigi</div>
-                        <div class="draggable" data-character="link">Link</div>
-                    </div>
-                    <div class="characterImage">
-                        <div class="droppable" data-character="steve"><img src="character-game/characters/steve.png" alt="Steve"></div>
-                        <div class="droppable" data-character="link"><img src="character-game/characters/link.png" alt="Link"></div>
-                        <div class="droppable" data-character="luigi"><img src="character-game/characters/luigi.png" alt="Luigi"></div>
-                        <div class="droppable" data-character="pikachu"><img src="character-game/characters/pikachu.png" alt="Pikachu"></div>
-                    </div>
+    <!-- SECTION: Match The Characters Game -->
+    <div id="character-game" style="display:none;">
+        <div class="character-game-container">
+            <h1 class="game-title">Match The Character</h1>
+            <div class="timerDisplay">Time Left: 15s</div>
+            <h2 class="scoreDisplay" id="scoreDisplay">Score: 0</h2>
+            <div class="game-container">
+                <div class="characters">
+                    <div class="draggable" data-character="pikachu">Pikachu</div>
+                    <div class="draggable" data-character="steve">Steve</div>
+                    <div class="draggable" data-character="luigi">Luigi</div>
+                    <div class="draggable" data-character="link">Link</div>
                 </div>
-                <div class="character-level2">
-                    <div class="characters">
-                        <div class="draggable" data-character="masterchief">Master Chief</div>
-                        <div class="draggable" data-character="pacman">Pac-Man</div>
-                        <div class="draggable" data-character="shrek">Shrek</div>
-                        <div class="draggable" data-character="jerry">Jerry</div>
-                    </div>
-                    <div class="characterImage">
-                        <div class="droppable" data-character="jerry"><img src="character-game/characters/jerry.png" alt="Jerry"></div>
-                        <div class="droppable" data-character="pacman"><img src="character-game/characters/pacman.png" alt="Pac-Man"></div>
-                        <div class="droppable" data-character="masterchief"><img src="character-game/characters/masterchief.png" alt="Master Chief"></div>
-                        <div class="droppable" data-character="shrek"><img src="character-game/characters/shrek.png" alt="Shrek"></div>
-                    </div>
-                </div>
-                <div class="character-level3">
-                    <div class="characters">
-                        <div class="draggable" data-character="spiderman">Spider-Man</div>
-                        <div class="draggable" data-character="eevee">Eevee</div>
-                        <div class="draggable" data-character="spongebob">Spongebob</div>
-                        <div class="draggable" data-character="tomnook">Tom Nook</div>
-                    </div>
-                    <div class="characterImage">
-                        <div class="droppable" data-character="spongebob"><img src="character-game/characters/spongebob.png" alt="Spongebob"></div>
-                        <div class="droppable" data-character="spiderman"><img src="character-game/characters/spiderman.png" alt="Spiderman"></div>
-                        <div class="droppable" data-character="tomnook"><img src="character-game/characters/tomnook.png" alt="Tom Nook"></div>
-                        <div class="droppable" data-character="eevee"><img src="character-game/characters/eevee.png" alt="Eevee"></div>
-                    </div>
-                </div>
-                
-                <div class="result-container">
-                    <h2 class="resultDisplay"></h2>
-                    <button class="guessButton">Guess</button>
-                    <button class="nextLevel" style="display: none;">Next Level</button>
-                    <button class="back-to-menu">Back to Menu</button>
-                </div>
-                <div class="summaryContainer">
-                    <h3>Summary</h3>
-                    <ul class="summaryList"></ul>
-                </div>
-                <div class="resultBoard" style="display:none;">
-                    <h1>Game Over</h1>
-                    <p class="resultDisplay"></p>
-                    <button class="restart-btn">Restart Game</button>
-                    <button class="back-to-menu">Back to Menu</button>
+                <div class="characterImage">
+                    <div class="droppable" data-character="steve"><img src="character-game/characters/steve.png"
+                            alt="Steve"></div>
+                    <div class="droppable" data-character="link"><img src="character-game/characters/link.png"
+                            alt="Link"></div>
+                    <div class="droppable" data-character="luigi"><img src="character-game/characters/luigi.png"
+                            alt="Luigi"></div>
+                    <div class="droppable" data-character="pikachu"><img src="character-game/characters/pikachu.png"
+                            alt="Pikachu"></div>
                 </div>
             </div>
-        </div>
-
-
-
-
-
-
-                <!-- Match The Definition Game -->
-                <div id="definition-game" style="display:none;">
-                    <div class="definition-game-container">
-                        <h1 class="game-title">Match The Definition</h1>
-                        <div class="timerDisplay">Time Left: 15s</div>
-                        <h2 class="scoreDisplay" id="scoreDisplay">Score: 0</h2>
-                        <div class="game-container"> 
-                            <div class="words">
-                                <div class="draggable" data-word="planet">Planet</div>
-                                <div class="draggable" data-word="desert">Desert</div>
-                                <div class="draggable" data-word="village">Village</div>
-                                <div class="draggable" data-word="journey">Journey</div>
-                            </div>
-                            <div class="definitions">
-                                <div class="droppable definition-droppable" data-word="planet"><img src="definition-game/planet.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="journey"><img src="definition-game/journey.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="desert"><img src="definition-game/desert.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="village"><img src="definition-game/village.jpg" alt="image of word definition"></div>
-                            </div>
-                        </div>
-                        <div class="definition-level2">
-                            <div class="words">
-                                <div class="draggable" data-word="discovery">Discovery</div>
-                                <div class="draggable" data-word="history">History</div>
-                                <div class="draggable" data-word="invention">Invention</div>
-                                <div class="draggable" data-word="rescue">Rescue</div>
-                            </div>
-                            <div class="definitions">
-                                <div class="droppable definition-droppable" data-word="history"><img src="definition-game/history.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="invention"><img src="definition-game/invention.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="rescue"><img src="definition-game/rescue.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="discovery"><img src="definition-game/discovery.jpg" alt="image of word definition"></div>
-                            </div>
-                        </div>
-                        <div class="definition-level3">
-                            <div class="words">
-                                <div class="draggable" data-word="leader">Leader</div>
-                                <div class="draggable" data-word="season">Season</div>
-                                <div class="draggable" data-word="prize">Prize</div>
-                                <div class="draggable" data-word="price">Price</div>
-                            </div>
-                            <div class="definitions">
-                                <div class="droppable definition-droppable" data-word="season"><img src="definition-game/season.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="leader"><img src="definition-game/leader.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="price"><img src="definition-game/price.jpg" alt="image of word definition"></div>
-                                <div class="droppable definition-droppable" data-word="prize"><img src="definition-game/prize.jpg" alt="image of word definition"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="result-container">
-                            <h2 class="resultDisplay"></h2>
-                            <button class="guessButton">Guess</button>
-                            <button class="nextLevel" style="display: none;">Next Level</button>
-                            <button class="back-to-menu">Back to Menu</button>
-                        </div>
-                        <div class="summaryContainer">
-                            <h3>Summary</h3>
-                            <ul class="summaryList"></ul>
-                        </div>
-                        <div class="resultBoard" style="display:none;">
-                            <h1>Game Over</h1>
-                            <p class="resultDisplay"></p>
-                            <button class="restart-btn">Restart Game</button>
-                            <button class="back-to-menu">Back to Menu</button>
-                        </div>
-                    </div>
+            <div class="character-level2">
+                <div class="characters">
+                    <div class="draggable" data-character="masterchief">Master Chief</div>
+                    <div class="draggable" data-character="pacman">Pac-Man</div>
+                    <div class="draggable" data-character="shrek">Shrek</div>
+                    <div class="draggable" data-character="jerry">Jerry</div>
                 </div>
+                <div class="characterImage">
+                    <div class="droppable" data-character="jerry"><img src="character-game/characters/jerry.png"
+                            alt="Jerry"></div>
+                    <div class="droppable" data-character="pacman"><img src="character-game/characters/pacman.png"
+                            alt="Pac-Man"></div>
+                    <div class="droppable" data-character="masterchief"><img
+                            src="character-game/characters/masterchief.png" alt="Master Chief"></div>
+                    <div class="droppable" data-character="shrek"><img src="character-game/characters/shrek.png"
+                            alt="Shrek"></div>
+                </div>
+            </div>
+            <div class="character-level3">
+                <div class="characters">
+                    <div class="draggable" data-character="spiderman">Spider-Man</div>
+                    <div class="draggable" data-character="eevee">Eevee</div>
+                    <div class="draggable" data-character="spongebob">Spongebob</div>
+                    <div class="draggable" data-character="tomnook">Tom Nook</div>
+                </div>
+                <div class="characterImage">
+                    <div class="droppable" data-character="spongebob"><img src="character-game/characters/spongebob.png"
+                            alt="Spongebob"></div>
+                    <div class="droppable" data-character="spiderman"><img src="character-game/characters/spiderman.png"
+                            alt="Spiderman"></div>
+                    <div class="droppable" data-character="tomnook"><img src="character-game/characters/tomnook.png"
+                            alt="Tom Nook"></div>
+                    <div class="droppable" data-character="eevee"><img src="character-game/characters/eevee.png"
+                            alt="Eevee"></div>
+                </div>
+            </div>
+
+            <div class="result-container">
+                <h2 class="resultDisplay"></h2>
+                <button class="guessButton">Guess</button>
+                <button class="nextLevel" style="display: none;">Next Level</button>
+                <button class="back-to-menu">Back to Menu</button>
+            </div>
+            <div class="summaryContainer">
+                <h3>Summary</h3>
+                <ul class="summaryList"></ul>
+            </div>
+            <div class="resultBoard" style="display:none;">
+                <h1>Game Over</h1>
+                <p class="resultDisplay"></p>
+                <button class="restart-btn">Restart Game</button>
+                <button class="back-to-menu">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- SECTION: Match The Definition Game -->
+    <div id="definition-game" style="display:none;">
+        <div class="definition-game-container">
+            <h1 class="game-title">Match The Definition</h1>
+            <div class="timerDisplay">Time Left: 15s</div>
+            <h2 class="scoreDisplay" id="scoreDisplay">Score: 0</h2>
+            <div class="game-container">
+                <div class="words">
+                    <div class="draggable" data-word="planet">Planet</div>
+                    <div class="draggable" data-word="desert">Desert</div>
+                    <div class="draggable" data-word="village">Village</div>
+                    <div class="draggable" data-word="journey">Journey</div>
+                </div>
+                <div class="definitions">
+                    <div class="droppable definition-droppable" data-word="planet"><img src="definition-game/planet.jpg"
+                            alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="journey"><img
+                            src="definition-game/journey.jpg" alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="desert"><img src="definition-game/desert.jpg"
+                            alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="village"><img
+                            src="definition-game/village.jpg" alt="image of word definition"></div>
+                </div>
+            </div>
+            <div class="definition-level2">
+                <div class="words">
+                    <div class="draggable" data-word="discovery">Discovery</div>
+                    <div class="draggable" data-word="history">History</div>
+                    <div class="draggable" data-word="invention">Invention</div>
+                    <div class="draggable" data-word="rescue">Rescue</div>
+                </div>
+                <div class="definitions">
+                    <div class="droppable definition-droppable" data-word="history"><img
+                            src="definition-game/history.jpg" alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="invention"><img
+                            src="definition-game/invention.jpg" alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="rescue"><img src="definition-game/rescue.jpg"
+                            alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="discovery"><img
+                            src="definition-game/discovery.jpg" alt="image of word definition"></div>
+                </div>
+            </div>
+            <div class="definition-level3">
+                <div class="words">
+                    <div class="draggable" data-word="leader">Leader</div>
+                    <div class="draggable" data-word="season">Season</div>
+                    <div class="draggable" data-word="prize">Prize</div>
+                    <div class="draggable" data-word="price">Price</div>
+                </div>
+                <div class="definitions">
+                    <div class="droppable definition-droppable" data-word="season"><img src="definition-game/season.jpg"
+                            alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="leader"><img src="definition-game/leader.jpg"
+                            alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="price"><img src="definition-game/price.jpg"
+                            alt="image of word definition"></div>
+                    <div class="droppable definition-droppable" data-word="prize"><img src="definition-game/prize.jpg"
+                            alt="image of word definition"></div>
+                </div>
+            </div>
+
+            <div class="result-container">
+                <h2 class="resultDisplay"></h2>
+                <button class="guessButton">Guess</button>
+                <button class="nextLevel" style="display: none;">Next Level</button>
+                <button class="back-to-menu">Back to Menu</button>
+            </div>
+            <div class="summaryContainer">
+                <h3>Summary</h3>
+                <ul class="summaryList"></ul>
+            </div>
+            <div class="resultBoard" style="display:none;">
+                <h1>Game Over</h1>
+                <p class="resultDisplay"></p>
+                <button class="restart-btn">Restart Game</button>
+                <button class="back-to-menu">Back to Menu</button>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <!-- JAVASCRIPT -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
     <script src="js/script.js"></script>
+    
 
 
 
 </body>
+
 </html>

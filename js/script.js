@@ -1,45 +1,45 @@
 $(document).ready(function() {
-    // Start Game Button Click
+    // Hide menu and show game selection screen when start button is clicked
     $("#start-btn").click(function() {
-        $("#menu").hide();           // Hide the main menu
-        $("#game-selection").show();    // Show the game selector
+        $("#menu").hide();        
+        $("#game-selection").show();    
     });
 
-    // Instructions Button Click
+    // Hide menu and show instructions screen when instructions button is clicked
     $("#instructions-btn").click(function() {
-        $("#menu").hide();            // Hide the main menu
-        $("#instructions").show();    // Show the instructions screen
+        $("#menu").hide();          
+        $("#instructions").show();    
     });
 
-    // Show scoreboard button
+    // Show scoreboard when scoreboard button is clicked
     $("#scoreboard-btn").click(function() {
-        $("#menu").hide();           // Hide the main menu
+        $("#menu").hide();           
         $("#scoreboard").show();
         displayScoreboard();
     });
 
-    // Back Button Click from Instructions
+    // Hide instructions or scoreboard and go back to the main menu
     $(".back-btn").click(function() {
-        $("#instructions").hide();    // Hide the instructions screen
-        $("#scoreboard").hide(); // Hide the scoreboard
-        $("#menu").show();            // Show the main menu
+        $("#instructions").hide();    
+        $("#scoreboard").hide(); 
+        $("#menu").show();            
     });
 
-    // Exit Button (optional)
+    // Close the browser window when exit button is clicked
     $("#exit-btn").click(function() {
         window.close();
     });
 
-    // Store original text before correct/wrong changes
+    // Store original text for draggable elements
     $(".draggable").each(function() {
         $(this).data("original-text", $(this).text());
     });
 
-    // Initially hide game selector and instructions
+    // Initially hide game selection and instructions screens
     $("#game-selection").hide();
     $("#instructions").hide();
 
-    //Background Music Buttons
+    // Audio control for background music
     const audiobtn = $("#audio-btn");
     const icon = $("#audio-btn > i");
     const audio = $("audio")[0];
@@ -57,11 +57,13 @@ $(document).ready(function() {
         }
     });
 
+    // Play interaction audio for game buttons
     var aud = document.getElementById('interact-audio');
-    $(".menu-button, #audio-btn, #brightness-mode, .game-btn, .back-to-menu, .back-btn, #submitName").on("click", function(){
+    $(".menu-button, #audio-btn, #brightness-mode, .game-btn, .back-to-menu, .back-btn, #submitName, .guessButton, .nextLevel").on("click", function(){
         aud.play();
     })
 
+    // Toggle brightness mode (light or night)
     document.getElementById("brightness-mode").addEventListener("click", function () {
         const body = document.body;
     
@@ -82,25 +84,26 @@ $(document).ready(function() {
 
 
     let countdownTimer;
-    let timeRemaining = 15; // 15-second countdown for making a guess
+    let timeRemaining = 15; // Automatic 15-second countdown for making a guess
     let totalTime = 0; // Track total time taken for each game
     let userName = "";
     let totalScore = 0; // Track the total score
 
+    // Username submission function
     $('#submitName').click(function() {
         userName = $("#userName").val().trim();
         var $userNameInput = $('#userName'); // Cache the input field
 
         // Check if userName is provided
         if (userName) {
-            $('#userDisplayName').text(userName);
+            $('#userDisplayName').text(userName); // Display username on game screen after submitted 
             $('#welcome-message').show();
             $('#name-input').hide();
             $('#menu').show();
 
             // Remove error state
             $userNameInput.css({
-                'border': '',
+                'border': '', // Clear the error border
                 'animation': '' // Clear any animation
             });
             $('#errorMessage').text(""); // Clear any previous error messages
@@ -108,7 +111,7 @@ $(document).ready(function() {
             // Show error message and add pulsate effect
             $('#errorMessage').text("--Username must not be blank--");
             
-            // Define the pulsate animation
+            // Username error animation
             $userNameInput.css({
                 'border': '2px solid red',
                 'animation': 'pulsate 0.6s 3' // Add pulsate animation
@@ -131,10 +134,11 @@ $(document).ready(function() {
             `;
             document.head.appendChild(style);
 
-            $userNameInput.focus(); // Focus on the input field
+            $userNameInput.focus(); // Focus on the input field to highlight the error
         }
     });
 
+    // Array of different game levels with elements to show/hide
     let levels = [
         {
             name: "Level 1",
@@ -152,7 +156,7 @@ $(document).ready(function() {
             elementsToHide: [".flag-level1", ".character-level1", ".definition-level1", ".flag-level2", ".character-level2", ".definition-level2"]
         },
         {
-            // Special level to handle the end of the game
+            // "Level" to handle the end of the game after all levels are played
             name: "End of Game",
             isEnd: true,
             elementsToShow: [".resultBoard", ".resultDisplay"],
@@ -168,7 +172,7 @@ $(document).ready(function() {
         }
     ];
 
-    // Hide game selection and flag game by default
+    // Hide games + game selection screen by default
     $("#game-selection, #flag-game, #character-game, #definition-game").hide();
 
 
@@ -178,53 +182,51 @@ $(document).ready(function() {
         $("#game-selection").show();
     });
 
-    // Flag game button
+    // Button to start flag game and hiding / showing required elements 
     $("#flag-btn").click(function() {
-        currentGameType = "flag";
+        currentGameType = "flag"; // Set current game type to flag
         $("#game-selection").hide();
         $("#title").hide();
         $("#flag-game").show();
         $(".flag-level2").hide();
         $(".flag-level3").hide();
         $(".resultDisplay").hide();
-        resetFullGame();
-        startTimer(); // Start the countdown timer
+        resetFullGame(); // Reset the game
+        startTimer(); // Start the countdown timer for selected game
     });
 
-    // Flag game button
+    // Button to start character game and hiding / showing required elements 
     $("#character-btn").click(function() {
-        currentGameType = "character";
+        currentGameType = "character"; // Set current game type to character
         $("#game-selection").hide();
         $("#title").hide();
         $("#character-game").show();
         $(".character-level2").hide();
         $(".character-level3").hide();
         $(".resultDisplay").hide();
-        resetFullGame();
-        startTimer(); // Start the countdown timer
+        resetFullGame(); // Reset the game
+        startTimer(); // Start the countdown timer for selected game
     });
 
+    // Button to start definition game and hiding / showing required elements 
     $("#definition-btn").click(function(){
-        currentGameType = "definition";
+        currentGameType = "definition"; // Set current game type to definition
         $("#game-selection").hide();
         $("#title").hide();
         $("#definition-game").show();
         $(".definition-level2").hide();
         $(".definition-level3").hide();
         $(".resultDisplay").hide();
-        resetFullGame();
-        startTimer(); // Start the countdown timer
+        resetFullGame(); // Reset the game
+        startTimer(); // Start the countdown timer for selected game
     })
 
-// Make items draggable (can revert before Guess is clicked)
-$(".draggable").draggable({
-    revert: "invalid"
-});
-
-// Make items droppable
+// Make items draggable and droppable for matching mechanics
+$(".draggable").draggable({revert: "invalid"});
 $(".droppable").droppable({
     accept: ".draggable",
     drop: function(event, ui) {
+        //Store variables for dropped elements and data attributes
         var droppable = $(this);
         var draggable = ui.draggable;
         var droppedCountry = ui.draggable.data("country");
@@ -234,6 +236,7 @@ $(".droppable").droppable({
         var droppedWord = ui.draggable.data("word");
         var definition = $(this).data("word");
 
+        //Log dropped items 
         console.log("Dropped Country:", droppedCountry);
         console.log("Flag Country:", flagCountry);
         console.log("Dropped Character:", droppedCharacter);
@@ -241,9 +244,10 @@ $(".droppable").droppable({
         console.log("Dropped Word:", droppedWord);
         console.log("Definition:", definition);
 
-        // Determine if the match is correct
-        let isMatched = false;  // Declare a single `isMatched` variable to use
+        // Logic for matching draggables and droppables
+        let isMatched = false;  // Default match status
 
+        // Check match conditions based on data attributes
         if (droppedCountry && flagCountry) {
             isMatched = droppedCountry === flagCountry;
         } else if (droppedCharacter && characterImage) {
@@ -258,27 +262,26 @@ $(".droppable").droppable({
         // Add the class to indicate a successful drop
         $(this).addClass("ui-droppable-dropped");
 
-        // Position the draggable item on the droppable area
+        // Position the draggable item on the droppable area to make it centered
         ui.draggable.position({
             my: "center",
             at: "center",
             of: $(this)
         });
 
-        // Store a reference to the droppable in the draggable
+        
         draggable.data("droppable", droppable);
-        // Ensure the draggable stays visually on top
-        draggable.css("z-index", 15); // Set a higher z-index to keep draggables above the droppable
+        draggable.css("z-index", 15); // Set a higher z-index to keep draggables in front of the droppable
     }
 });
 
 
 
-
+//Function for guessButton click
 $(document).on("click", ".guessButton", function() {
-    let correctAnswers = 0; // Initialize correctAnswers variable for this level
+    let correctAnswers = 0; // Initialize correctAnswers variable for level
 
-    // Iterate over each draggable that is visible to check for correctness
+    // Iterate over each draggable that is visible to check for correct answers
     $(".draggable:visible").each(function() {
         // Check if the draggable has been matched
         var isMatched = $(this).data("matched") === true;
@@ -301,10 +304,10 @@ $(document).on("click", ".guessButton", function() {
         if (droppable) {
             // Add an overlay element to the droppable indicating correct/incorrect
             if (isMatched) {
-                // Append a checkmark icon to the droppable area
+                // Append a checkmark icon to the droppable area if correct
                 droppable.append('<div class="overlay checkmark"><i class="fas fa-check"></i></div>');
             } else {
-                // Append a cross icon to the droppable area
+                // Append a cross icon to the droppable area if incorrect
                 droppable.append('<div class="overlay crossmark"><i class="fas fa-times"></i></div>');
             }
         }
@@ -325,7 +328,6 @@ $(document).on("click", ".guessButton", function() {
     $(".scoreDisplay").text("Score: " + totalScore);
     $(".scoreDisplay").show(); // Ensure the score display is visible
 
-    // Hide the guess button and show the next level button
    // Hide the guess button and show the next level button
 $(".guessButton").hide();
 
@@ -340,24 +342,36 @@ let currentLevel = 1; // Variable to track the current level
 
     // Function to start the timer
     function startTimer() {
-        timeRemaining = 15; // Reset to 15 seconds for each game
-        totalTime++
+
+        // Set different duration for definition game due to required reading - with increased difficulty 
+        if (currentGameType === 'definition') {
+            if (currentLevel === 1) {
+                timeRemaining = 25; // 25 seconds for Level 1
+            } else if (currentLevel === 2) {
+                timeRemaining = 20; // 20 seconds for Level 2
+            } else if (currentLevel === 3) {
+                timeRemaining = 15; // 15 seconds for Level 3
+            }
+        } else {
+            timeRemaining = 15; // Default to 15 seconds for other games
+        }
+        
         $('.timerDisplay').text(`Time Left: ${timeRemaining}s`);
 
         countdownTimer = setInterval(function() {
-            timeRemaining--;
+            timeRemaining--; // Tick down time remaining by 1s
             $('.timerDisplay').text(`Time Left: ${timeRemaining}s`);
-
+            totalTime++ // Add 1s to the total time played 
             if (timeRemaining <= 0) {
-                clearInterval(countdownTimer);
+                clearInterval(countdownTimer); 
                 autoGuess();
             }
         }, 1000);
     }
 
-    // Function to automatically make a guess when time runs out
+    // Function to automatically guess when time runs out
     function autoGuess() {
-        $(".guessButton").click(); // Trigger guess logic
+        $(".guessButton").click(); // Trigger guess button click
     }
 
 // Logic for the next level button
@@ -381,22 +395,22 @@ $(document).on("click", ".nextLevel", function() {
         // Access the current level data from the array
         let currentLevelData = levels[currentLevel - 1];
 
-        // Hide elements for the current level
+        // Hide elements not required for the current level
         currentLevelData.elementsToHide.forEach(element => {
             $(element).hide();
         });
 
-        // Show elements for the current level
+        // Show elements required for the current level
         currentLevelData.elementsToShow.forEach(element => {
             $(element).show();
         });
-            // Reset only necessary elements for the next level (not needed for the end level)
-    // If it's the end of the game, run the function to update the score
+
+    // If end of the game, run the function to update the score
     if (currentLevelData.isEnd && typeof currentLevelData.showFinalScore === 'function') {
         currentLevelData.showFinalScore();
     } else {
         // If not end of game, reset level elements and show the guess button
-        resetGame(resetLevels = true, resetScores = false, resetDraggables = true); // Reset game for next level without resetting current scores
+        resetGame(resetLevels = true, resetScores = false, resetDraggables = true); // Reset game for next level without resetting current score
         $("#guessButton").show(); // Ensure the guess button is shown for the next level
         $(".summaryContainer").removeClass("summaryGuessed");
     }
@@ -412,15 +426,15 @@ $(document).on("click", ".nextLevel", function() {
 // Restart Game Button Click
 $(".restart-btn").click(function() {
     saveGameData(); // Save game data when the game ends
-    $(".resultBoard").hide(); // Hide the result board
+    $(".resultBoard").hide(); 
     $(".resultDisplay").hide();
     resetFullGame(); // Reset the game
     $(".scoreDisplay").show();
     $(".game-title").show();
     $(".result-container").show();
-    $(".summaryContainer").removeClass("summaryGuessed");
-    $(".summaryList").empty();
-    clearInterval(countdownTimer);
+    $(".summaryContainer").removeClass("summaryGuessed"); // Remove the guessed class from the summary container
+    $(".summaryList").empty(); // Empty the summary list
+    clearInterval(countdownTimer); // Clear any existing timer
 });
 
 $(document).on("click", ".back-to-menu", function () {
@@ -452,7 +466,7 @@ $(document).on("click", ".back-to-menu", function () {
     clearInterval(countdownTimer);
 });
 
-
+// Function to reset the full game
 function resetFullGame() {
     resetGame();
     $(".flag-level2, .flag-level3").hide(); // Hide level 2 and 3 elements
@@ -461,6 +475,7 @@ function resetFullGame() {
     $(".nextLevel").hide();                 // Hide the next level button
     currentLevel = 1;          
     $(".scoreDisplay").text("Score: 0");          // Reset score
+    $(".timerDisplay").show();
 }
 
 // Function to reset draggable items for the next level
@@ -473,7 +488,7 @@ function resetGame(resetLevels = true, resetScores = true, resetDraggables = tru
             $(this).text($(this).data("original-text")); // Reset to original text
             $(this).show(); // Ensure draggable items are visible
 
-            // Reset position
+            // Reset draggables positions
             $(this).css({
                 top: "initial",
                 left: "initial",
@@ -501,10 +516,10 @@ function resetGame(resetLevels = true, resetScores = true, resetDraggables = tru
     // Function to save game data to local storage
     function saveGameData() {
         let gameData = {
-            userName: userName,
-            totalScore: totalScore,
-            totalTime: totalTime,
-            gameType: currentGameType // Save the current game type here
+            userName: userName, // Save the user's name
+            totalScore: totalScore, // Save the total score
+            totalTime: totalTime, // Save the total time played
+            gameType: currentGameType // Save the current game type
         };
 
         console.log("Saving game data:", gameData); // Debugging log for saving data
@@ -524,47 +539,56 @@ function resetGame(resetLevels = true, resetScores = true, resetDraggables = tru
         let characterGameHtml = "<h3>Match The Characters Scores</h3>";
         let definitionGameHtml = "<h3>Match The Definition Scores</h3>";
 
-        if (scoreboard.length === 0) {
+    // Add headings for each scoreboard column
+    let scoreboardHeader = `
+        <div class="scoreboard-header">
+            <span>Name</span>
+            <span>Score</span>
+            <span>Total Time</span>
+        </div>`;
+
+        // Sort the scoreboard array
+        scoreboard.sort((a, b) => {
+            if (b.totalScore === a.totalScore) {
+                return a.totalTime - b.totalTime; // If scores are equal, sort by total time (ascending)
+            }
+            return b.totalScore - a.totalScore; // Sort by total score (descending)
+        });
+        
+    //Check if there are any recorded scores
+    if (scoreboard.length === 0) {
         flagGameHtml += "<p>No scores recorded yet for Match The Flag.</p>";
         characterGameHtml += "<p>No scores recorded yet for Match The Characters.</p>";
         definitionGameHtml += "<p>No scores recorded yet for Match The Definition.</p>";
-        } else {
-            scoreboard.forEach(function(entry, index) {
-            if (entry.gameType === 'flag') {
-                flagGameHtml += `<div class="score-entry">
-                    <span>Username: ${entry.userName}</span>,
-                    <span>Final Score: ${entry.totalScore}</span>,
-                    <span>Total Time: ${entry.totalTime}s</span>
-                </div>`;
-            } else if (entry.gameType === 'character') {
-                characterGameHtml += `<div class="score-entry">
-                    <span>Username: ${entry.userName}</span>,
-                    <span>Final Score: ${entry.totalScore}</span>,
-                    <span>Total Time: ${entry.totalTime}s</span>
-                </div>`;
-            } else if (entry.gameType === 'definition') {
-                definitionGameHtml += `<div class="score-entry">
-                    <span>Username: ${entry.userName}</span>,
-                    <span>Final Score: ${entry.totalScore}</span>,
-                    <span>Total Time: ${entry.totalTime}s</span>
-                </div>`;
-                  
-                ;
-            }});
-        }
+    } else {
+        // Add the header to each game
+        flagGameHtml += scoreboardHeader;
+        characterGameHtml += scoreboardHeader;
+        definitionGameHtml += scoreboardHeader;
 
+        // Iterate through the scoreboard and add each score to the HTML
+        scoreboard.forEach(function(entry) {
+            let entryHtml = `
+                <div class="score-entry">
+                    <span>${entry.userName}</span>
+                    <span>${entry.totalScore}</span>
+                    <span>${entry.totalTime}s</span>
+                </div>`;
+
+            // Add the entry to the corresponding game scoreboard
+            if (entry.gameType === 'flag') {
+                flagGameHtml += entryHtml;
+            } else if (entry.gameType === 'character') {
+                characterGameHtml += entryHtml;
+            } else if (entry.gameType === 'definition') {
+                definitionGameHtml += entryHtml;
+            }
+        });
+    }
+        // Display the scoreboard HTML to correct game scoreboard column
         $("#scoreboard-content").html(
             `<div class="scoreboard-column">${flagGameHtml}</div>
              <div class="scoreboard-column">${characterGameHtml}</div>
              <div class="scoreboard-column">${definitionGameHtml}</div>`
         );
     };
-
-
-
-//FIXME - equation? Instead of definition maybe do an equation based guess? 
-
-// equation / equation / equation / equation 
-//                                       = 4   - equation dragged and dropped before equals sign?
-
-//FIXME - WORDLE?????? - Instead of definition or equation maybe do WORDLE??????????

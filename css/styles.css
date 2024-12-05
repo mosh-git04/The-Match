@@ -25,11 +25,12 @@ input{
   margin-inline: 25%;
   background-color: #00FFBA;
   padding: 2%;
-  font-size: 1.1em;
+  font-size: 1.3em;
   transition: background-color 0.3s ease, transform 0.2s ease;
   cursor: pointer;
   border:ridge 5px;
   border-color: #422503;
+  
 }
 
 #submitName:hover {
@@ -48,16 +49,15 @@ body {
   font-family: 'Bubblegum Sans', cursive;
   background-color: #2c3e50d0; /* Background should background image fail to load */
   background-image: url('../images/dark_background2.jpg'); 
-  background-size: cover; /* Cover to ensure the background fits well */
+  background-size: cover; 
   background-blend-mode: darken;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full height for a more immersive experience */
-  color: #f1ecef; /* Light text color for better contrast */
+  height: 100vh; 
+  color: #fff; 
   overflow: hidden; /* Hide scrollbars */
-  
 }
 
 /* Default (night mode) */
@@ -149,7 +149,21 @@ body.light-mode #summaryContainer {
 .instructions p {
   width: 600px;
   font-size: 24px;
-  line-height: 1.5; /* Improved line spacing for readability */
+  line-height: 1.5;
+}
+
+#scoreboard{
+  width: 70%;
+}
+
+#scoreboard h3{
+  letter-spacing: 2px;
+}
+
+#scoreboard .back-btn{
+  width: 30%;
+  margin: auto;
+  margin-top: 25px;
 }
 
 #scoreboard-content {
@@ -160,7 +174,7 @@ body.light-mode #summaryContainer {
 
 .scoreboard-column {
   width:30%;
-  padding: 50px;
+  padding: 30px;
   background-color: rgba(44, 62, 80, 0.9);
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -168,6 +182,28 @@ body.light-mode #summaryContainer {
   color: #fff;
 }
 
+.score-entry {
+  display: flex;                
+  justify-content: space-between; 
+  align-items: center;         
+  padding: 5px 0;               
+  font-size: 1.2rem;           
+}
+
+.score-entry span {
+  margin-right: 10px;           
+  white-space: nowrap;         
+}
+
+.scoreboard-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #fff;
+    margin-bottom: 10px;
+}
 
 
 /* Game Selector Styles */
@@ -292,7 +328,7 @@ body.light-mode #summaryContainer {
 }
 
 
-/* 2x2 grid layout for countries and flags */
+/* 2x2 grid layout for draggables and droppables */
 .countries, .flags, .characters, .characterImage, .words, .definitions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -324,7 +360,7 @@ body.light-mode #summaryContainer {
 .droppable {
   background-color: #e8e8e800;
   border: 2px dashed #d94263;
-  line-height: 0; /* Remove text line-height */
+  line-height: 0;
 }
 
 .droppable img {
@@ -336,14 +372,14 @@ body.light-mode #summaryContainer {
 
 
 .guessButton, .nextLevel, .back-to-menu, .restart-btn{
-  background-color: #00FFBA; /* Highlight color for button */
-  color: #fff; /* White text color */
-  border: none; /* No border */
-  padding: 10px 20px; /* Padding for button */
-  border-radius: 15px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor */
-  font-size: 1.2rem; /* Button text size */
-  transition: background-color 0.3s; /* Smooth background change */
+  background-color: #00FFBA; 
+  color: #000; 
+  border: none; 
+  padding: 10px 20px;
+  border-radius: 15px; 
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   margin-top: 20px;
   margin-inline: 10px;
   font-family: 'Bubblegum Sans', cursive;   
@@ -357,9 +393,9 @@ body.light-mode #summaryContainer {
 }
 
 .result-container {
-  display: flex; /* Flexbox for horizontal alignment */
-  justify-content: space-between; /* Spread elements: result on left, button on right */
-  align-items: center; /* Vertically center both */
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
 }
 
 .nextLevel {
@@ -367,14 +403,14 @@ body.light-mode #summaryContainer {
 }
 
 .resultDisplay {
-  font-size: 2rem; /* Increase result display size */
+  font-size: 2rem; 
   margin-top: 20px;
-  color: #ffffff; /* Dark text color */
+  color: #ffffff; 
 }
 
 .timerDisplay{
   font-size: 2rem; 
-  color: red; 
+  color: #fdcb6e; 
   margin-bottom: 20px;
 }
 
@@ -383,26 +419,26 @@ body.light-mode #summaryContainer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 24px; /* Adjust size to fit the droppable */
+  font-size: 24px; 
   z-index: 20; /* Ensure it is on top of the droppable */
   align-content: center;
 }
 
 .checkmark {
-  background-color: rgba(0, 255, 0, .7); /* Green for correct country text */
+  background-color: rgba(0, 255, 0, .7); /* Green for correct text */
   width: 50px;
   height: 50px;
   border-radius: 10%;
 }
 
 .crossmark {
-  background-color: rgba(255, 0, 0, .7); /* Red for incorrect country text */
+  background-color: rgba(255, 0, 0, .7); /* Red for incorrect text */
   width: 50px;
   height: 50px; 
   border-radius: 10%;
 }
 .droppable {
-  position: relative; /* Make sure the droppable is positioned to allow absolute positioning of overlays */
+  position: relative; 
 }
 
 .draggable {
@@ -412,7 +448,7 @@ body.light-mode #summaryContainer {
 
 .summaryContainer {
   position: absolute;
-  right: 100px; /* Adjust the spacing as needed */
+  right: 100px;
   top: 200px;
   width: 200px;
   padding: 10px;
@@ -424,7 +460,7 @@ body.light-mode #summaryContainer {
 
 .summaryGuessed{
   position: absolute;
-  right: 300px; /* Adjust the spacing as needed */
+  right: 300px;
   top: 200px;
   width: 200px;
   padding: 10px;
