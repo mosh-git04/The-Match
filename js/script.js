@@ -109,7 +109,7 @@ $(document).ready(function() {
             $('#errorMessage').text("--Username must not be blank--");
             
             // Username error animation
-            $userNameInput.css({
+            $userNameInput.css({ 
                 'border': '2px solid red',
                 'animation': 'pulsate 0.6s 3' // Add pulsate animation
             });
