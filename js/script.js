@@ -71,20 +71,17 @@ $(document).ready(function() {
             // Switching to Night Mode
             body.classList.remove("light-mode");
             body.classList.add("night-mode");
-            console.log("Switched to Night Mode");
         } else {
             // Switching to Light Mode
             body.classList.remove("night-mode");
             body.classList.add("light-mode");
-            console.log("Switched to Light Mode");
         }
     });
 });
 
 
-
     let countdownTimer;
-    let timeRemaining = 15; // Automatic 15-second countdown for making a guess
+    let timeRemaining = 20; // Automatic 15-second countdown for making a guess
     let totalTime = 0; // Track total time taken for each game
     let userName = "";
     let totalScore = 0; // Track the total score
@@ -236,14 +233,6 @@ $(".droppable").droppable({
         var droppedWord = ui.draggable.data("word");
         var definition = $(this).data("word");
 
-        //Log dropped items 
-        console.log("Dropped Country:", droppedCountry);
-        console.log("Flag Country:", flagCountry);
-        console.log("Dropped Character:", droppedCharacter);
-        console.log("Character Image:", characterImage);
-        console.log("Dropped Word:", droppedWord);
-        console.log("Definition:", definition);
-
         // Logic for matching draggables and droppables
         let isMatched = false;  // Default match status
 
@@ -257,7 +246,6 @@ $(".droppable").droppable({
         }
 
         ui.draggable.data("matched", isMatched);  // Store if matched
-        console.log("Match status:", isMatched);
 
         // Add the class to indicate a successful drop
         $(this).addClass("ui-droppable-dropped");
@@ -334,8 +322,7 @@ $(".guessButton").hide();
 // Ensure the next level button is visible
 $(".nextLevel").show(); // Use jQuery's show() to ensure it's visible
 
-// Debugging: Add a log to confirm the button's state
-console.log("Next level button state after guess clicked:", $(".nextLevel").css("display"));
+
 });
 let currentLevel = 1; // Variable to track the current level
 
@@ -346,14 +333,14 @@ let currentLevel = 1; // Variable to track the current level
         // Set different duration for definition game due to required reading - with increased difficulty 
         if (currentGameType === 'definition') {
             if (currentLevel === 1) {
-                timeRemaining = 25; // 25 seconds for Level 1
+                timeRemaining = 45; // 25 seconds for Level 1
             } else if (currentLevel === 2) {
-                timeRemaining = 20; // 20 seconds for Level 2
+                timeRemaining = 40; // 20 seconds for Level 2
             } else if (currentLevel === 3) {
-                timeRemaining = 15; // 15 seconds for Level 3
+                timeRemaining = 35; // 15 seconds for Level 3
             }
         } else {
-            timeRemaining = 15; // Default to 15 seconds for other games
+            timeRemaining = 20; // Default to 15 seconds for other games
         }
         
         $('.timerDisplay').text(`Time Left: ${timeRemaining}s`);
@@ -418,8 +405,7 @@ $(document).on("click", ".nextLevel", function() {
     clearInterval(countdownTimer); // Clear any existing timer
     startTimer(); // Start a new countdown timer
 
-    // Log for debugging
-    console.log("Current level:", currentLevel, "Elements to show:", currentLevelData.elementsToShow);
+
     }    
 });
 
@@ -522,14 +508,11 @@ function resetGame(resetLevels = true, resetScores = true, resetDraggables = tru
             gameType: currentGameType // Save the current game type
         };
 
-        console.log("Saving game data:", gameData); // Debugging log for saving data
-
         // Check if there is already data in local storage
         let scoreboard = JSON.parse(localStorage.getItem('scoreboard')) || [];
         scoreboard.push(gameData);
         localStorage.setItem('scoreboard', JSON.stringify(scoreboard));
 
-        console.log("Current Local Storage:", localStorage.getItem('scoreboard')); // Debugging log for stored data
     }
 
     // Display the scoreboard from local storage
