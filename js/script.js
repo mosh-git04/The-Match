@@ -77,6 +77,20 @@ $(document).ready(function() {
             body.classList.add("light-mode");
         }
     });
+
+    // Function to toggle fullscreen
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            // Request fullscreen
+            document.documentElement.requestFullscreen();
+        } else {
+            // Exit fullscreen
+            document.exitFullscreen();
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('fullscreen-mode').addEventListener('click', toggleFullScreen);
 });
 
 
