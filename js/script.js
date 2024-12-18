@@ -77,6 +77,20 @@ $(document).ready(function() {
             body.classList.add("light-mode");
         }
     });
+
+    // Function to toggle fullscreen
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            // Request fullscreen
+            document.documentElement.requestFullscreen();
+        } else {
+            // Exit fullscreen
+            document.exitFullscreen();
+        }
+    }
+
+    // Add event listener to the button
+    document.getElementById('fullscreen-mode').addEventListener('click', toggleFullScreen);
 });
 
 
@@ -109,7 +123,7 @@ $(document).ready(function() {
             $('#errorMessage').text("--Username must not be blank--");
             
             // Username error animation
-            $userNameInput.css({
+            $userNameInput.css({ 
                 'border': '2px solid red',
                 'animation': 'pulsate 0.6s 3' // Add pulsate animation
             });
@@ -283,9 +297,9 @@ $(document).on("click", ".guessButton", function() {
         // Add to the summary list
         var itemName = $(this).text();
         if (isMatched) {
-            $(".summaryList").append(`<li class="correct-item">${itemName}: Correct</li>`);
+            $(".summaryList").append(`<li class="correct-item">${itemName}: <i class="fas fa-check"></li>`);
         } else {
-            $(".summaryList").append(`<li class="incorrect-item">${itemName}: Incorrect</li>`);
+            $(".summaryList").append(`<li class="incorrect-item">${itemName}: <i class="fas fa-times"></li>`);
         }
         
         // Ensure droppable is defined before attempting to append an overlay
