@@ -475,11 +475,13 @@ body.light-mode #summaryContainer {
 }
 
 .correct-item {
-  color: green;
+  color: rgb(0, 255, 0);
+  letter-spacing: 1px;
 }
 
 .incorrect-item {
   color: red;
+  letter-spacing: 1px;
 }
 
 .guessButton, .nextLevel, .back-to-menu, .restart-btn {

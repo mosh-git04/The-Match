@@ -283,9 +283,9 @@ $(document).on("click", ".guessButton", function() {
         // Add to the summary list
         var itemName = $(this).text();
         if (isMatched) {
-            $(".summaryList").append(`<li class="correct-item">${itemName}: Correct</li>`);
+            $(".summaryList").append(`<li class="correct-item">${itemName}: <i class="fas fa-check"></li>`);
         } else {
-            $(".summaryList").append(`<li class="incorrect-item">${itemName}: Incorrect</li>`);
+            $(".summaryList").append(`<li class="incorrect-item">${itemName}: <i class="fas fa-times"></li>`);
         }
         
         // Ensure droppable is defined before attempting to append an overlay
